@@ -1,17 +1,18 @@
 import { HEADER_TITLE } from "../lib/Language";
 import { cn } from "../utils";
+import logo from "../assets/logo.png";
 
 export default function Header({ language }: { language: 'chinese' | 'english' | 'japanese' }) {
-  const showBrand = import.meta.env.VITE_APP_SHOW_BRAND === "true";
+  const showBrand = true
   return (
     <div className="relative flex justify-center items-center my-8 gap-1">
       {showBrand &&
         <img
-          src="https://file.302.ai/gpt/imgs/5b36b96aaa052387fb3ccec2a063fe1e.png"
+          src={logo}
           className={cn(
             "app-icon object-contain"
           )}
-          alt="302"
+          alt="logo"
           height={60}
           width={60}
         />

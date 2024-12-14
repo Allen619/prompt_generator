@@ -31,6 +31,10 @@
 
 @layer base {
   :root {
+    --custom-color: #3b82f6;      /* sky-500 */
+    --custom-color-hover: #2563eb; /* sky-600 */
+    --custom-color-active: #1d4ed8;/* sky-700 */
+
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
 
