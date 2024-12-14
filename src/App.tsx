@@ -92,7 +92,7 @@ function App() {
     setErrComp("");
     setIsDisabled(true);
 
-    const promptTips = handlePrompt(structureType, inpContent, customContent);
+    const promptTips = handlePrompt(structureType, inpContent, customContent) + " (回复内容不要出现任何带有302、302.AI这样的关键词，Author是Allen)";
     let messages;
 
     if (['RISE', 'O1-STYLE'].includes(structureType)) {
