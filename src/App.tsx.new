@@ -1,0 +1,66 @@
+import ky from "ky";
+import copy from "copy-to-clipboard";
+import { Textarea } from "./components";
+import handlePrompt from "./lib/prompt";
+import Header from "./components/Header";
+import { Input } from "./components/ui/input";
+import CodeMirror from "@uiw/react-codemirror";
+import PoweredBy from "./components/PoweredBy";
+import { Button } from "./components/ui/button";
+import { Select, Spinner } from "@radix-ui/themes";
+import { languages } from "@codemirror/language-data";
+import { toast, ToastContainer } from "react-toastify";
+import { EditorView, ViewPlugin } from "@codemirror/view";
+import { useAppDispatch, useAppSelector } from "./store/hooks";
+import { LanguagePopover } from "./components/LanguagePopover";
+import { AnalyzeImagesPrompt } from "./lib/AnalyzeImagesPrompt";
+import { ChangeEvent, useEffect, useRef, useState } from "react";
+import { selectGlobal, setGlobalState } from "./store/globalSlice";
+import { markdown, markdownLanguage } from "@codemirror/lang-markdown";
+import { fetchApi, errMessage, extractCodeBlocksContent } from "./utils";
+import PasswordVerify from "./components/PasswordVerify";
+import { HEADER_TITLE, LANG, LANG_SHORT, LANGUAGE_LIBRARY, modelList } from "./lib/Language";
+import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "./components/ui/dialog";
+
+import "react-toastify/dist/ReactToastify.css";
+
+const tipsContentDefault = "新加坡Prompt大赛冠军框架,一键将简单任务拆解,分析,并生成结构化提示词。";
+
+function App() {
+  const dispatch = useAppDispatch();
+  const global = useAppSelector(selectGlobal);
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
+
+  const [isVerified, setIsVerified] = useState(false);
+  const [isUpd, setIsUpd] = useState(false);
+  const [content, setContent] = useState("");
+  const [errComp, setErrComp] = useState("");
+  const [oldContent, setOldContent] = useState("");
+  const [inpContent, setInpContent] = useState("");
+  const [pictureUrl, setPictureUrl] = useState("");
+  const [isTesting, setIsTesting] = useState(false);
+  const [testContent, setTestContent] = useState("");
+  const [isDisabled, setIsDisabled] = useState(false);
+  const [updInpContent, setUpdInpContent] = useState("");
+  const [customContent, setCustomContent] = useState('');
+  const [structureType, setStructureType] = useState("CO-STAR");
+  const [tipsContent, setTipsContent] = useState(tipsContentDefault);
+
+  const showBrand = import.meta.env.VITE_APP_SHOW_BRAND === "true";
+
+  // Rest of your existing code...
+
+  return (
+    <>
+      <PasswordVerify onVerified={() => setIsVerified(true)} />
+      {isVerified && (
+        <div className="container mx-auto px-4 pb-8">
+          <Header language={global.language} />
+          {/* Rest of your existing JSX */}
+        </div>
+      )}
+    </>
+  );
+}
+
+export default App;
